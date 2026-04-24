@@ -4,10 +4,10 @@ import { saveMemory, getMemory, getAllMemory } from '../services/memoryService.j
 import dotenv from 'dotenv';
 dotenv.config();
 
-// We initialize OpenAI. If OPENAI_API_KEY is not in .env, it will fail, 
-// so ensure it's set before running real queries.
+// We initialize OpenAI. If OPENAI_API_KEY is missing (like on Render without env vars),
+// we provide a dummy key so the server starts and falls back to offline mock mode smoothly.
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY || "dummy_key_to_prevent_crash",
 });
 
 // We keep a simple in-memory message history for the demo
