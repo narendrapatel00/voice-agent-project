@@ -15,7 +15,7 @@ const App = () => {
 
   const fetchTodos = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/todos');
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}/api/todos`);
       const data = await res.json();
       setTodos(data);
     } catch (err) {
@@ -43,7 +43,7 @@ const App = () => {
     setIsProcessing(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/chat', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}/api/chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ message: messageText })
